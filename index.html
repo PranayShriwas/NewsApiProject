@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.0/journal/bootstrap.min.css"
         integrity="sha512-fL7TPYZDZLsu0fvpKJ4v7KiS89RPDjOSxz4F0+TPxYROWP67IrErLBfYE2JonegRnhH+3MiMZXd+bJwYOAqwpw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Hello, world!</title>
+    <title>News_Hub</title>
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">News_Hub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                 aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,16 +53,14 @@
                 </ul>
                 <form class="d-flex" id="searchForm">
                     <input id="searchInput" class="form-control me-sm-2" type="search" placeholder="Search topics">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="button" id="searchBtn">Search</button>
                 </form>
             </div>
         </div>
     </nav>
     <br>
     <div class="container">
-        <div class="row" id="newsContainer">
-
-        </div>
+        <div class="row" id="newsContainer"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -80,6 +78,7 @@
             const searchForm = document.getElementById("searchForm");
             const searchInput = document.getElementById("searchInput");
             const newsContainer = document.getElementById("newsContainer");
+            const searchBtn = document.getElementById("searchBtn");
 
             function fetchNews(searchQuery) {
                 const apiUrl = `https://newsapi.org/v2/everything?q=${searchQuery}&from=2024-01-02&sortBy=popularity&apiKey=b117751327744dbe99c23225706ce0a4`;
@@ -114,11 +113,13 @@
                     .catch(error => console.error("Error fetching news:", error));
             }
 
-            searchForm.addEventListener("submit", function (event) {
-                event.preventDefault();
+            searchBtn.addEventListener("click", function () {
                 const searchQuery = searchInput.value.trim() || "India";
                 fetchNews(searchQuery);
             });
+
+            // Initial news fetch
+
 
             fetchNews("India");
         });
